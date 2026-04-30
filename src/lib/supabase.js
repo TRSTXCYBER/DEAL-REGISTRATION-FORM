@@ -51,6 +51,10 @@ function mapFormToRow(values) {
 // Pure insert (no .select() chain) so we don't need a SELECT RLS policy.
 export async function insertDealRegistration(values) {
   const row = mapFormToRow(values)
+  // eslint-disable-next-line no-console
+  console.log('[supabase] raw form values:', values)
+  // eslint-disable-next-line no-console
+  console.log('[supabase] mapped row:', row)
   const { error } = await supabase.from(TABLE).insert(row)
   if (error) {
     // eslint-disable-next-line no-console

@@ -7,6 +7,7 @@ import FormSection from './components/FormSection'
 import Review from './components/Review'
 import Confirmation from './components/Confirmation'
 import { insertDealRegistration } from './lib/supabase'
+import { postToGhlWebhook } from './lib/webhook'
 
 // Screen identifiers: 'landing' | number (section index) | 'review' | 'confirm'
 const screenVariants = {
@@ -107,7 +108,17 @@ export default function App() {
     }
     setSubmitting(true)
     try {
-      await insertDealRegistration(values)
+      // Run DB insert + webhook POST in parallel. A webhook failure should
+      // not block success since the row is already safely in Supabase.
+      const [dbResult, webhookResult] = await Promise.allSettled([
+        insertDealRegistration(values),
+        postToGhlWebhook(values),
+      ])
+      if (dbResult.status === 'rejected') throw dbResult.reason
+      if (webhookResult.status === 'rejected') {
+        // eslint-disable-next-line no-console
+        console.warn('Webhook failed but DB insert succeeded:', webhookResult.reason)
+      }
       setScreen('confirm')
     } catch (err) {
       // eslint-disable-next-line no-console
