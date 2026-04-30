@@ -6,14 +6,7 @@ import Progress from './components/Progress'
 import FormSection from './components/FormSection'
 import Review from './components/Review'
 import Confirmation from './components/Confirmation'
-
-// Placeholder submit handler. Swap in Supabase / GoHighLevel / webhook later.
-async function submitDealRegistration(payload) {
-  // eslint-disable-next-line no-console
-  console.log('[DealRegistration] submit payload:', payload)
-  await new Promise((r) => setTimeout(r, 700))
-  return { ok: true }
-}
+import { insertDealRegistration } from './lib/supabase'
 
 // Screen identifiers: 'landing' | number (section index) | 'review' | 'confirm'
 const screenVariants = {
@@ -114,8 +107,12 @@ export default function App() {
     }
     setSubmitting(true)
     try {
-      await submitDealRegistration(values)
+      await insertDealRegistration(values)
       setScreen('confirm')
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Submit failed:', err)
+      alert('Something went wrong submitting the form. Please try again.')
     } finally {
       setSubmitting(false)
     }
