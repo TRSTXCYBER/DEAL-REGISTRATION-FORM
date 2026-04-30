@@ -1,6 +1,12 @@
 import Button from './Button'
 
 function displayValue(field, value) {
+  if (field.type === 'checkbox') {
+    if (!Array.isArray(value) || value.length === 0) {
+      return <span className="text-[color:var(--color-text-mute)]">—</span>
+    }
+    return <span className="text-[color:var(--color-text)]">{value.join(', ')}</span>
+  }
   if (!value || (field.type === 'select' && value === 'Please Select')) {
     return <span className="text-[color:var(--color-text-mute)]">—</span>
   }

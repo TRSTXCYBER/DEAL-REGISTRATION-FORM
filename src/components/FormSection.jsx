@@ -3,6 +3,7 @@ import TextField from './fields/TextField'
 import PhoneField from './fields/PhoneField'
 import SelectField from './fields/SelectField'
 import RadioGroup from './fields/RadioGroup'
+import CheckboxGroup from './fields/CheckboxGroup'
 import TextArea from './fields/TextArea'
 import Button from './Button'
 
@@ -33,6 +34,8 @@ function renderField(field, values, errors, onChange) {
       return <SelectField {...common} />
     case 'radio':
       return <RadioGroup {...common} />
+    case 'checkbox':
+      return <CheckboxGroup {...common} value={values[field.id] ?? []} />
     case 'textarea':
       return <TextArea {...common} />
     case 'url':

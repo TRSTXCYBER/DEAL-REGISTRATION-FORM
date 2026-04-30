@@ -1,6 +1,6 @@
-# Discovery Call Form
+# Deal Registration Form
 
-A standalone multi-step Discovery Call intake form built with **React 19**,
+A standalone multi-step Deal Registration intake form built with **React 19**,
 **Vite**, **Tailwind CSS v4**, and **framer-motion**. Frontend only — ready to
 be wired to Supabase, GoHighLevel, or a webhook later.
 
@@ -67,27 +67,31 @@ src/
       PhoneField.jsx
       SelectField.jsx
       RadioGroup.jsx
+      CheckboxGroup.jsx
       TextArea.jsx
 ```
 
 ## Screen flow
 
 1. Landing
-2. Contact Information
-3. Company Snapshot
-4. IT Setup
-5. Qualification
-6. Cyber / Risk Snapshot
-7. Intent / Plan
-8. Review / Submit
-9. Confirmation
+2. Deal / Company Info
+3. Contact Info
+4. Deal Ownership
+5. Deal Qualification
+6. Cyber Snapshot
+7. Lead Handling Logic
+8. Notes
+9. Review / Submit
+10. Confirmation
 
 ## Validation
 
-- All fields required except `company_website` and `technology_concern`.
+- All fields required except `company_website` and `additional_comments`.
 - Errors only appear **after** the user tries to continue/submit.
 - Dropdowns require a choice other than `Please Select`.
+- Checkbox groups (Services Interested In) require at least one selection.
 - `company_website` uses a loose pattern (domain-like, optional `http(s)://`).
+- `email` and `submitted_by_email` are validated against a basic email pattern.
 - `phone` only requires non-empty input.
 
 See `src/data/formConfig.js` for the full schema and to add/edit fields.
@@ -97,8 +101,8 @@ See `src/data/formConfig.js` for the full schema and to add/edit fields.
 The placeholder submit handler lives at the top of `src/App.jsx`:
 
 ```js
-async function submitDiscoveryCall(payload) {
-  console.log('[DiscoveryCall] submit payload:', payload)
+async function submitDealRegistration(payload) {
+  console.log('[DealRegistration] submit payload:', payload)
   await new Promise((r) => setTimeout(r, 700))
   return { ok: true }
 }
@@ -119,5 +123,5 @@ config.
 
 Mobile-first layout tested around 375 / 430 / 768 / 1024 / 1440 px. The form
 uses a comfortable max width on desktop (~42rem) rather than stretching.
-# DISCOVERY-CALL-FORM
+
 # DEAL-REGISTRATION-FORM

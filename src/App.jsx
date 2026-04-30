@@ -8,9 +8,9 @@ import Review from './components/Review'
 import Confirmation from './components/Confirmation'
 
 // Placeholder submit handler. Swap in Supabase / GoHighLevel / webhook later.
-async function submitDiscoveryCall(payload) {
+async function submitDealRegistration(payload) {
   // eslint-disable-next-line no-console
-  console.log('[DiscoveryCall] submit payload:', payload)
+  console.log('[DealRegistration] submit payload:', payload)
   await new Promise((r) => setTimeout(r, 700))
   return { ok: true }
 }
@@ -114,7 +114,7 @@ export default function App() {
     }
     setSubmitting(true)
     try {
-      await submitDiscoveryCall(values)
+      await submitDealRegistration(values)
       setScreen('confirm')
     } finally {
       setSubmitting(false)
@@ -205,7 +205,7 @@ export default function App() {
         </AnimatePresence>
 
         <footer className="mt-6 text-center text-xs text-[color:var(--color-text-mute)]">
-          © {new Date().getFullYear()} Discovery Call Intake
+          © {new Date().getFullYear()} Deal Registration
         </footer>
       </main>
     </div>

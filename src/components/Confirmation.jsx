@@ -22,7 +22,7 @@ export default function Confirmation({ onStartOver }) {
 
       <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Thank you</h1>
       <p className="mt-3 text-[15px] text-[color:var(--color-text-dim)]">
-        Your discovery call information has been submitted.
+        Your deal registration has been submitted.
       </p>
 
       <div className="mt-8">

@@ -23,11 +23,11 @@ export default function Landing({ onStart }) {
       </motion.div>
 
       <h1 className="text-3xl font-bold tracking-tight text-[color:var(--color-text)] sm:text-4xl">
-        Discovery Call Form
+        Deal Registration Form
       </h1>
       <p className="mt-3 max-w-md text-sm leading-relaxed text-[color:var(--color-text-dim)] sm:text-[15px]">
-        Share a few quick details about your company, IT setup, and goals so we
-        can make your discovery call productive from minute one.
+        Share a few quick details about the deal, company, and contact so we
+        can register and route this opportunity properly.
       </p>
 
       <div className="mt-7">
